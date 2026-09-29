@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Recurso educativo interactivo para trabajar el Trastorno del Desarrollo del Lenguaje (TDL).">
+  <title>Recurso interactivo TDL | Álvaro Díaz Hidalgo</title>
+
+  <style>
+    :root{
+      --blue:#315BEA;
+      --blue-dark:#2346C5;
+      --blue-soft:#EEF2FF;
+      --green:#20A477;
+      --ink:#182238;
+      --muted:#667085;
+      --bg:#F6F8FC;
+      --white:#FFFFFF;
+      --line:#E4E8F0;
+      --shadow:0 18px 50px rgba(25,39,75,.10);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.65;
+    }
+
+    a{color:inherit}
+    .container{width:min(1080px,calc(100% - 36px));margin:auto}
+
+    nav{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(228,232,240,.8);
+    }
+
+    .nav-inner{
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+
+    .brand-mark{
+      width:38px;height:38px;border-radius:12px;
+      display:grid;place-items:center;
+      color:#fff;background:var(--blue);
+      box-shadow:0 8px 20px rgba(49,91,234,.24);
+    }
+
+    .nav-link{
+      text-decoration:none;
+      color:var(--muted);
+      font-size:.95rem;
+      font-weight:650;
+    }
+
+    .nav-link:hover{color:var(--blue)}
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:92px 0 115px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.22), transparent 24%),
+        radial-gradient(circle at 15% 85%, rgba(255,255,255,.15), transparent 25%),
+        linear-gradient(135deg,#2D57DF 0%,#637BF0 100%);
+      color:#fff;
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:420px;height:420px;
+      right:-150px;bottom:-220px;
+      border:70px solid rgba(255,255,255,.07);
+      border-radius:50%;
+    }
+
+    .hero-content{position:relative;z-index:2;max-width:790px}
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border:1px solid rgba(255,255,255,.28);
+      background:rgba(255,255,255,.10);
+      border-radius:999px;
+      font-size:.88rem;
+      font-weight:700;
+      margin-bottom:22px;
+    }
+
+    h1{
+      font-size:clamp(2.35rem,6vw,4.45rem);
+      line-height:1.04;
+      letter-spacing:-.055em;
+      margin:0 0 20px;
+      max-width:850px;
+    }
+
+    .hero p{
+      margin:0;
+      max-width:700px;
+      font-size:1.12rem;
+      color:rgba(255,255,255,.91);
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:30px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      padding:14px 20px;
+      border-radius:13px;
+      text-decoration:none;
+      font-weight:800;
+      border:1px solid transparent;
+      transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+
+    .btn-primary{
+      background:#fff;
+      color:var(--blue-dark);
+      box-shadow:0 12px 28px rgba(15,30,80,.18);
+    }
+
+    .btn-secondary{
+      color:#fff;
+      border-color:rgba(255,255,255,.32);
+      background:rgba(255,255,255,.09);
+    }
+
+    main{padding-bottom:70px}
+
+    .overlap{
+      margin-top:-55px;
+      position:relative;
+      z-index:4;
+    }
+
+    .card{
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .intro{
+      padding:34px;
+      display:grid;
+      grid-template-columns:1.35fr .65fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .section-kicker{
+      color:var(--blue);
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-weight:850;
+      margin-bottom:8px;
+    }
+
+    h2{
+      margin:0 0 12px;
+      font-size:clamp(1.65rem,3vw,2.15rem);
+      line-height:1.15;
+      letter-spacing:-.035em;
+    }
+
+    .intro p{margin:0;color:var(--muted)}
+
+    .mini-stat{
+      padding:24px;
+      border-radius:18px;
+      background:var(--blue-soft);
+      border:1px solid #DDE5FF;
+      text-align:center;
+    }
+
+    .mini-stat .big{font-size:2.3rem;font-weight:900;color:var(--blue);line-height:1}
+    .mini-stat .small{margin-top:7px;color:var(--muted);font-weight:650}
+
+    section{margin-top:24px}
+
+    .section-card{padding:38px}
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:25px;
+    }
+
+    .feature{
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#FBFCFE;
+    }
+
+    .feature-icon{
+      width:48px;height:48px;
+      display:grid;place-items:center;
+      border-radius:14px;
+      background:var(--blue-soft);
+      font-size:1.35rem;
+      margin-bottom:15px;
+    }
+
+    .feature h3{font-size:1.08rem;margin:0 0 7px}
+    .feature p{font-size:.94rem;color:var(--muted);margin:0}
+
+    .access{
+      display:grid;
+      grid-template-columns:1fr 300px;
+      gap:40px;
+      align-items:center;
+    }
+
+    .access-copy p{color:var(--muted);margin:0 0 18px}
+
+    .direct-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--blue);
+      font-weight:750;
+      font-size:.92rem;
+      word-break:break-word;
+      text-decoration:none;
+    }
+
+    .qr-wrap{
+      text-align:center;
+      padding:22px;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:#FBFCFE;
+    }
+
+    .qr-wrap img{
+      width:220px;
+      max-width:100%;
+      height:auto;
+      display:block;
+      margin:0 auto 13px;
+      border-radius:10px;
+    }
+
+    .qr-wrap strong{display:block}
+    .qr-wrap span{font-size:.83rem;color:var(--muted)}
+
+    .author{
+      text-align:center;
+      padding:38px;
+    }
+
+    .author-label{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:7px;
+    }
+
+    .author-name{
+      font-size:1.65rem;
+      font-weight:900;
+      letter-spacing:-.025em;
+    }
+
+    footer{
+      padding:0 0 38px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.85rem;
+    }
+
+    .top{
+      display:inline-block;
+      margin-top:10px;
+      color:var(--blue);
+      text-decoration:none;
+      font-weight:750;
+    }
+
+    @media(max-width:800px){
+      .intro,.access{grid-template-columns:1fr}
+      .features{grid-template-columns:1fr}
+      .intro,.section-card,.author{padding:27px}
+      .nav-link{display:none}
+      .hero{padding:72px 0 95px}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .btn{transition:none}
+    }
+  </style>
+</head>
+
+<body id="inicio">
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#inicio" aria-label="Inicio">
+        <span class="brand-mark">T</span>
+        <span>Recurso TDL</span>
+      </a>
+      <a class="nav-link" href="#recurso">Conocer el recurso</a>
+      <a class="nav-link" href="#acceso">Acceder al juego</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-content">
+      <div class="eyebrow">🎓 Recurso educativo interactivo</div>
+      <h1>Recurso para trabajar el Trastorno del Desarrollo del Lenguaje</h1>
+      <p>
+        Una propuesta digital e interactiva pensada para apoyar el trabajo del
+        TDL mediante actividades dinámicas, visuales y adaptadas a niños y niñas.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://alvarodh2009-blip.github.io/fruteria-magica-definitivo/" target="_blank" rel="noopener noreferrer">
+          ▶ Acceder al recurso
+        </a>
+        <a class="btn btn-secondary" href="#recurso">↓ Saber para qué sirve</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container overlap">
+
+      <section class="card intro">
+        <div>
+          <div class="section-kicker">El recurso</div>
+          <h2>Una herramienta sencilla para aprender jugando</h2>
+          <p>
+            Este recurso interactivo permite trabajar aspectos relacionados con el
+            lenguaje a través de una experiencia digital sencilla y atractiva.
+            Su formato facilita que las actividades puedan realizarse de una forma
+            más dinámica y motivadora.
+          </p>
+        </div>
+        <div class="mini-stat">
+          <div class="big">TDL</div>
+          <div class="small">Trastorno del Desarrollo del Lenguaje</div>
+        </div>
+      </section>
+
+      <section id="recurso" class="card section-card">
+        <div class="section-kicker">¿Para qué sirve?</div>
+        <h2>Objetivo del recurso</h2>
+        <p style="color:var(--muted);margin:0">
+          La aplicación está diseñada como un recurso de apoyo para trabajar el
+          lenguaje de una manera interactiva y accesible.
+        </p>
+
+        <div class="features">
+          <article class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3>Trabajar el lenguaje</h3>
+            <p>
+              Permite realizar actividades dirigidas al desarrollo y refuerzo
+              de diferentes habilidades lingüísticas.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">🎮</div>
+            <h3>Aprender jugando</h3>
+            <p>
+              Presenta las actividades mediante un formato interactivo que
+              busca favorecer la participación y la motivación.
+            </p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">👩‍🏫</div>
+            <h3>Apoyo educativo</h3>
+            <p>
+              Puede utilizarse como material complementario por profesionales
+              y familias en el trabajo con niños y niñas con TDL.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="acceso" class="card section-card access">
+        <div class="access-copy">
+          <div class="section-kicker">Acceso</div>
+          <h2>Entra directamente al juego</h2>
+          <p>
+            Accede al recurso desde el botón o escanea el código QR con tu
+            dispositivo móvil. Ambas opciones llevan directamente a la aplicación.
+          </p>
+
+          <a class="btn" style="background:var(--blue);color:white;box-shadow:0 10px 22px rgba(49,91,234,.22)"
+             href="https://alvarodh2009-blip.github.io/fruteria-magica-definitivo/" target="_blank" rel="noopener noreferrer">
+            🚀 Abrir el juego
+          </a>
+
+          <div style="margin-top:18px">
+            <a class="direct-link" href="https://alvarodh2009-blip.github.io/fruteria-magica-definitivo/" target="_blank" rel="noopener noreferrer">
+              🔗 Acceso directo al recurso
+            </a>
+          </div>
+        </div>
+
+        <div class="qr-wrap">
+          <img src="qr_recurso_tdl.png" alt="Código QR para acceder al recurso interactivo">
+          <strong>Escanea para acceder</strong>
+          <span>Abre la cámara de tu móvil y apunta al código.</span>
+        </div>
+      </section>
+
+      <section class="card author">
+        <div class="author-label">Autor del recurso</div>
+        <div class="author-name">Álvaro Díaz Hidalgo</div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      Recurso educativo interactivo · TDL · Álvaro Díaz Hidalgo
+      <br>
+      <a class="top" href="#inicio">↑ Volver al inicio</a>
+    </div>
+  </footer>
+
+</body>
+</html>
